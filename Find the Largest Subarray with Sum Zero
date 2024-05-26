@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to find the largest subarray with sum zero
+int maxLen(int arr[], int n) {
+    int max_len = 0;
+    for (int i = 0; i < n; i++) {
+        int curr_sum = 0;
+        for (int j = i; j < n; j++) {
+            curr_sum += arr[j];
+            if (curr_sum == 0) {
+                int len = j - i + 1;
+                if (len > max_len) {
+                    max_len = len;
+                }
+            }
+        }
+    }
+    return max_len;
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+    int* arr = (int*)malloc(n * sizeof(int));
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int len = maxLen(arr, n);
+    printf("The length of the largest subarray with sum 0 is: %d\n", len);
+
+    free(arr);
+    return 0;
+}
